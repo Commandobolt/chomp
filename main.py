@@ -1,5 +1,6 @@
 import pygame
 import sys
+from chomp_util import make_background
 
 # Initialize Pygame
 pygame.init()
@@ -8,7 +9,7 @@ pygame.init()
 for ii in range(0, 10):
     print()
 
-print('\nRunning make_background.py.')
+print('\nRunning main.py.')
 print('-------------------------------------------\n')
 
 # Screen dimensions
@@ -19,21 +20,9 @@ scr_hgt = 600  # (px)
 scr = pygame.display.set_mode((scr_wid, scr_hgt))
 pygame.display.set_caption('Making a customized background')
 
-
-#load images
-water = pygame.image.load('assests/sprites/water.png').convert()
-sand = pygame.image.load('assests/sprites/sand.png').convert()
-img_px = 64
-
-#drawing the water (duplicaitng the image until it fills up screen)
-for x in range(0, scr_wid, img_px):
-    for y in range(0, scr_hgt, img_px):
-        scr.blit(water,(x,y))
-
-#drawing the sand
-for x in range(0, scr_wid, img_px):
-        scr.blit(sand,(x, scr_hgt - img_px))
-
+#make static background
+background = scr.copy()
+make_background(background)
 
 running = True
 while running:
@@ -42,6 +31,8 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+    scr.blit(background, (0,0))
 
     # Update the display
     pygame.display.flip()
