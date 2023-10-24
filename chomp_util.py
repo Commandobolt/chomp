@@ -7,12 +7,14 @@ def make_background(surface):
     sand = pygame.image.load('assests/sprites/sand.png').convert()
     sandtop = pygame.image.load('assests/sprites/sand_top.png').convert()
     seagrass = pygame.image.load('assests/sprites/seagrass.png').convert()
+    waves = pygame.image.load('assests/sprites/waves.png').convert()
     img_px = 64
 
 
     #set dark pixels as transparent
     sandtop.set_colorkey((0,0,0))
     seagrass.set_colorkey((0,0,0))
+    waves.set_colorkey((0,0,0))
 
     #drawing the water (duplicaitng the image until it fills up screen)
     for x in range(0, surface.get_width(), water.get_width()):
@@ -31,3 +33,6 @@ def make_background(surface):
     for _ in range(0, 5):
         x = random.randint(0, surface.get_width() - seagrass.get_width())
         surface.blit(seagrass, (x, surface.get_height() - sand.get_height() - sandtop.get_height() - seagrass.get_height() + 5))
+
+    for x in range(0, surface.get_width(), water.get_width()):
+        surface.blit(waves, (x, waves.get_height() + 5))
